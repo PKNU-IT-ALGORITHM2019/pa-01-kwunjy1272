@@ -12,7 +12,7 @@ void wordStore(char *line);
 void search(char *target);
 int find(char *target, int begin, int end);
 void search_same(int n);
-void print(int n, bool found);
+void print(int n);
 
 string word[200000];
 string wordClass[200000];
@@ -66,6 +66,7 @@ void fileRead(char *fileName) {
 	fclose(fp);
 	cout << "Open File" << endl;
 }
+
 void wordStore(char *line) {
 	char *context = NULL;
 	char *tok_Word = strtok_s(line, "(", &context);
@@ -91,32 +92,25 @@ void wordStore(char *line) {
 		tok_Word = strtok(NULL, " ");
 	}
 }
+
 void search(char *target) {
 	int i = find(target, 0, index - 1);
 	char *index_word = (char *)word[i].c_str();
 	if (_stricmp(index_word, target) != 0)
-		print(i, false);
+		print(i);
 	else
 		search_same(i);
 }
 
-void print(int n, bool found) {
-	string same_word[30];
-	int count = 0;
-	if (found) {
-
-	}
-	else {
-		cout << "Not found.\n" << word[n] << "(" << wordClass[n] << ")" << account[n] << "- - - - -\n";
-		cout << word[n + 1] << "(" << wordClass[n + 1] << ")" << account[n + 1] << '\n';
-	}
+void print(int n) {
+	cout << "Not found.\n" << word[n] << "(" << wordClass[n] << ")" << account[n] << "- - - - -\n";
+	cout << word[n + 1] << "(" << wordClass[n + 1] << ")" << account[n + 1] << '\n';
 }
 
 void search_same(int n) {
 	string same_word[30];
 	int count = 0;
 	int tmp = n;
-	print(n, true);
 	same_word[count++] = word[n] + "(" + wordClass[n] + ")" + account[n];
 	while (1) {
 		if (n != index && word[n] == word[n + 1]) {
