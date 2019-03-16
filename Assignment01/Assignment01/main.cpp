@@ -1,4 +1,3 @@
-/* 20141264 information communication Engineer*/
 #define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
 #include <string>
@@ -12,7 +11,6 @@ void wordStore(char *line);
 void search(char *target);
 int find(char *target, int begin, int end);
 void search_same(int n);
-void print(int n);
 
 string word[200000];
 string wordClass[200000];
@@ -96,17 +94,13 @@ void wordStore(char *line) {
 void search(char *target) {
 	int i = find(target, 0, index - 1);
 	char *index_word = (char *)word[i].c_str();
-	if (_stricmp(index_word, target) != 0)
-		print(i);
+	if (_stricmp(index_word, target) != 0) {
+		cout << "Not found.\n" << word[i] << "(" << wordClass[i] << ")" << account[i] << "- - - - -\n";
+		cout << word[i + 1] << "(" << wordClass[i + 1] << ")" << account[i + 1] << '\n';
+	}
 	else
 		search_same(i);
 }
-
-void print(int n) {
-	cout << "Not found.\n" << word[n] << "(" << wordClass[n] << ")" << account[n] << "- - - - -\n";
-	cout << word[n + 1] << "(" << wordClass[n + 1] << ")" << account[n + 1] << '\n';
-}
-
 void search_same(int n) {
 	string same_word[30];
 	int count = 0;
